@@ -8,6 +8,8 @@ import android.view.View;
 
 /**
  * Created by Fussen on 2016/10/27.
+ * <p>
+ * 进度条
  */
 
 public class RecoderProgress extends View {
@@ -22,7 +24,7 @@ public class RecoderProgress extends View {
 
     private int progressColor = 0xFF00FF00;
 
-    private int lowMinTimeProgressColor = 0xFFFC2828;
+    private int minTimeProgressColor = 0xFFFC2828;
 
     private long currTime;
 
@@ -49,7 +51,7 @@ public class RecoderProgress extends View {
     private void init(Context context) {
         this.mContext = context;
         mPaint.setStyle(Paint.Style.FILL);
-        mPaint.setColor(lowMinTimeProgressColor);
+        mPaint.setColor(minTimeProgressColor);
     }
 
     @Override
@@ -81,12 +83,12 @@ public class RecoderProgress extends View {
     }
 
 
-    public int getLowMinTimeProgressColor() {
-        return lowMinTimeProgressColor;
+    public int getMinTimeProgressColor() {
+        return minTimeProgressColor;
     }
 
-    public void setLowMinTimeProgressColor(int lowMinTimeProgressColor) {
-        this.lowMinTimeProgressColor = lowMinTimeProgressColor;
+    public void setMinTimeProgressColor(int minTimeProgressColor) {
+        this.minTimeProgressColor = minTimeProgressColor;
     }
 
     public int getProgressColor() {
@@ -111,7 +113,7 @@ public class RecoderProgress extends View {
             this.currTime = System.currentTimeMillis();
             invalidate();
             setVisibility(VISIBLE);
-            mPaint.setColor(lowMinTimeProgressColor);
+            mPaint.setColor(minTimeProgressColor);
         }
     }
 
@@ -124,8 +126,8 @@ public class RecoderProgress extends View {
 
 
     enum State {
-        START(1, "开始"),
-        PAUSE(2, "暂停");
+        START(1, "start"),
+        PAUSE(2, "pause");
 
         State(int code, String message) {
             this.code = code;

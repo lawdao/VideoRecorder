@@ -57,7 +57,7 @@ public class RecordActivity extends Activity implements MediaRecorderBase.OnErro
     /**
      * progress 小于录制最少时间的颜色
      */
-    private static int LOW_MIN_TIME_PROGRESS_COLOR = 0xFFFC2828;
+    private static int MIN_TIME_PROGRESS_COLOR = 0xFFFC2828;
     /**
      * progress 颜色
      */
@@ -99,15 +99,11 @@ public class RecordActivity extends Activity implements MediaRecorderBase.OnErro
     private boolean isRecoder;
 
     TextView back;
-    RelativeLayout titleView;
     SurfaceView mSurfaceView;
     ImageView mImgRecordFocusing;
-    RelativeLayout mRlRecoderSurfaceview;
     TextView hitInfo;
     RecoderProgress mRecorderProgress;
     TextView startPlay;
-    RelativeLayout mRlRecorderBottom;
-    RelativeLayout mRlBottomRecoder;
     private ProgressDialog progressDialog;
     private TextView tv_cancel;
 
@@ -119,7 +115,6 @@ public class RecordActivity extends Activity implements MediaRecorderBase.OnErro
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);//没有标题
         setContentView(R.layout.activity_record);
-
 
         initView();
 
@@ -166,7 +161,7 @@ public class RecordActivity extends Activity implements MediaRecorderBase.OnErro
 
         mRecorderProgress.setMaxTime(RECORD_TIME_MAX);
         mRecorderProgress.setMinRecordertime(RECORD_TIME_MIN);
-        mRecorderProgress.setLowMinTimeProgressColor(LOW_MIN_TIME_PROGRESS_COLOR);
+        mRecorderProgress.setMinTimeProgressColor(MIN_TIME_PROGRESS_COLOR);
         mRecorderProgress.setProgressColor(PROGRESS_COLOR);
 
 
@@ -188,15 +183,11 @@ public class RecordActivity extends Activity implements MediaRecorderBase.OnErro
     private void initView() {
         back = (TextView) findViewById(R.id.tv_recorder_cancel);
         tv_cancel = (TextView) findViewById(R.id.tv_cancel);
-        titleView = (RelativeLayout) findViewById(R.id.layout_title);
         mSurfaceView = (SurfaceView) findViewById(R.id.surfaceView);
         mImgRecordFocusing = (ImageView) findViewById(R.id.img_record_focusing);
-        mRlRecoderSurfaceview = (RelativeLayout) findViewById(R.id.rl_recoder_surfaceview);
         hitInfo = (TextView) findViewById(R.id.tv_recoder_tips);
         mRecorderProgress = (RecoderProgress) findViewById(R.id.recorder_progress);
         startPlay = (TextView) findViewById(R.id.btn_press);
-        mRlRecorderBottom = (RelativeLayout) findViewById(R.id.rl_recorder_bottom);
-        mRlBottomRecoder = (RelativeLayout) findViewById(R.id.ll_bottom_recoder);
     }
 
 
@@ -530,9 +521,4 @@ public class RecordActivity extends Activity implements MediaRecorderBase.OnErro
 
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mMediaRecorder.release();
-    }
 }
