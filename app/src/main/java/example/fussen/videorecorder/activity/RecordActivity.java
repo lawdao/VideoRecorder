@@ -300,7 +300,6 @@ public class RecordActivity extends Activity implements MediaRecorderBase.OnErro
                     default:
                         return true;
                 }
-
             } else {
                 if (isNeedFinish) {
                     isNeedFinish = false;
@@ -312,9 +311,7 @@ public class RecordActivity extends Activity implements MediaRecorderBase.OnErro
                 }
             }
             return true;
-
         }
-
     };
 
     private void startRecoder() {

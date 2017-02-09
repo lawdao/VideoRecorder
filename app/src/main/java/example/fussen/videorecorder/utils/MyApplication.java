@@ -16,7 +16,6 @@ public class MyApplication extends Application {
         super.onCreate();
 
         // 设置拍摄视频缓存路径
-
         VCamera.setVideoCachePath(Config.VIDEO_PATH);
 
         // 开启log输出,ffmpeg输出到logcat
