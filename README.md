@@ -16,19 +16,19 @@
 1. 视频录制
 
 	首先，先感谢Vcamera，新浪微博的视频播放就是用的Vitamio的技术，因此，我用他的视频录制也不为过吧，这个案例就是用Vcamera实现的，所以说实现起来很是容易，少了很多不必要的麻烦，当然这里面也有许多我们可以学习的地方
-	
+
 2. 视频播放
 
 	视频的循环播放是用的`videoView`
-	
+
 ## 主要代码
 ### 1. 初始化
-	
+
 
 ```
 // 设置拍摄视频缓存路径
 	VCamera.setVideoCachePath(Config.VIDEO_PATH);
-	
+
 	// 开启log输出,ffmpeg输出到logcat
 	VCamera.setDebugMode(true);
 	// 初始化拍摄SDK，必须
@@ -36,18 +36,18 @@
 ```
 
 ### 2. 激活Media
-	
+
 
 ```
 mMediaRecorder = new MediaRecorderNative();
-	
+
 	mMediaRecorder.setOnErrorListener(this);
 	mMediaRecorder.setOnEncodeListener(this);
 	File f = new File(VCamera.getVideoCachePath());
 	if (!FileUtils.checkFile(f)) {
 	    f.mkdirs();
 	}
-	String key =String.valueOf(System.currentTimeMillis()); 
+	String key =String.valueOf(System.currentTimeMillis());
 	mMediaObject = mMediaRecorder.setOutputDirectory(key,
 	VCamera.getVideoCachePath() + key);
 	        mMediaRecorder.setSurfaceHolder(mSurfaceView.getHolder());
@@ -56,53 +56,53 @@ mMediaRecorder = new MediaRecorderNative();
 
 ### 3. 处理监听事件
 
-	
+
 
 ```
  private View.OnTouchListener onVideoRecoderTouchListener = new View.OnTouchListener() {
 	        private float startY;
 	        private float moveY;
-	
+
 	        @Override
 	        public boolean onTouch(View v, MotionEvent event) {
-	
+
 	            if (mMediaRecorder == null) {
 	                return false;
 	            }
-	
+
 	            //第一次触摸记录时间
 	            if (isFirstTouch) {
 	                isFirstTouch = false;
 	                firstTime = System.currentTimeMillis();
 	            }
-	
+
 	            //和第一次触摸记录时间做对比
 	            if (System.currentTimeMillis() - firstTime < RECORD_TIME_MAX) {
-	
+
 	                switch (event.getAction()) {
-	
+
 	                    case MotionEvent.ACTION_DOWN:
-	
+
 	                        //开始录制
 	                        startY = event.getY();
 	                        startRecoder();
 	                        break;
 	                    case MotionEvent.ACTION_MOVE:
-	
+
 	                        moveY = event.getY();
 	                        float drution = moveY - startY;
-	
+
 	                        if ((drution > 0.0f) && Math.abs(drution) > OFFSET_DRUTION) {
 	                            //滑动取消
 	                            slideCancelRecoder();
-	
+
 	                        }
 	                        if ((drution < 0.0f) && (Math.abs(drution) > OFFSET_DRUTION)) {
 	                            releaseCancelRecoder();
 	                        }
 	                        break;
 	                    case MotionEvent.ACTION_UP:
-	
+
 	                        //停止录制
 	                        stopAll();
 	                        if (isCancelRecoder) {
@@ -138,7 +138,7 @@ mMediaRecorder = new MediaRecorderNative();
 
 ### 4. 播放视频
 
- 
+
 
 ```
        videoView.setVideoPath(path);
@@ -158,8 +158,6 @@ mMediaRecorder = new MediaRecorderNative();
 由于过程还是比较麻烦，只能粘贴部分代码，具体的代码，以我的Demo为主，大家可以下载Demo，浏览全部源码，毕竟这只是一个效果，最重要的还是如何录制视频，还有压缩视频，这些都是非常重要的，让他应用到你的项目中去吧
 ## 结束
 
-1. [点击下载Demo的apk](http://dl.download.csdn.net/down11/20161028/51196193ca616cd91f09237a98a5cbf9.apk?response-content-disposition=attachment;filename=%22video.apk%22&OSSAccessKeyId=9q6nvzoJGowBj4q1&Expires=1477661696&Signature=BQyf48h1jqYwBYdxfKicU3Svejc=%20%E2%80%9C%E7%82%B9%E5%87%BB%E4%B8%8B%E8%BD%BD%E2%80%9D)
+1. [点击下载Demo的apk](http://download.csdn.net/download/fussenyu/9667173)
 2. 欢迎各位关注我们的微信公共号：AppCode，文章都会先在微信公共号中发布的，扫面下面的二维码即可关注
 ![这里写图片描述](http://img.blog.csdn.net/20161028200540912)
-
-
