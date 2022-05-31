@@ -154,10 +154,4 @@ mMediaRecorder = new MediaRecorderNative();
         });
 ```
 
-## 最后的话
-由于过程还是比较麻烦，只能粘贴部分代码，具体的代码，以我的Demo为主，大家可以下载Demo，浏览全部源码，毕竟这只是一个效果，最重要的还是如何录制视频，还有压缩视频，这些都是非常重要的，让他应用到你的项目中去吧
-## 结束
 
-1. [点击下载Demo的apk](http://download.csdn.net/download/fussenyu/9667173)
-2. 欢迎各位关注我们的微信公共号：AppCode，文章都会先在微信公共号中发布的，扫面下面的二维码即可关注
-![这里写图片描述](http://img.blog.csdn.net/20161028200540912)
